@@ -169,7 +169,7 @@ load_file_data:
 	cmp ax, -1
 	jne @f
 	cmp dx, -1
-	je .file_end	
+	je .file_end
 @@:
 	push es
 	mov es, bx
@@ -276,7 +276,7 @@ load_file:
 	mov si, bp
 	mov dx, word[f_data + 2]
 	mov ax, word[f_data]
-	jmp @b	
+	jmp @b
 @@:
 	call load_file_data
 	mov si, ok_msg
@@ -410,7 +410,7 @@ boot2:
 	cmp bx, 0x9000 / 16
 	ja @f
 	call error
-	db "NO KERNEL LOADED",13,10,0	
+	db "NO KERNEL LOADED",13,10,0
 @@:
 	; Заполняем последний элемент списка файлов
 	xor ax, ax
@@ -448,7 +448,7 @@ boot2:
 	cmp ax, bx
 	je @f
 	call error
-	db "Required i386 or better",13,10,0	
+	db "Required i386 or better",13,10,0
 @@:
 	; Получим карту памяти
 	call get_memory_map
@@ -483,6 +483,8 @@ boot2:
 	; Загрузим значение в CR3
 	mov eax, 0x1000
 	mov cr3, eax
+
+
 	; Загрузим значение в GDTR
 	lgdt [gdtr32]
 	; Запретим прерывания
@@ -520,4 +522,4 @@ start32:
 	; Поместим в ESI адрес карты памяти
 	mov esi, memory_map
 	; Переходим на ядро
-	jmp 0xFFC00000 
+	jmp 0xFFC00000

@@ -7,14 +7,15 @@ section ".text" executable
 
 _start:
 	movzx edx, dl
-	push edx
-	push esi
 	push ebx
+	push esi
+	push edx
 	lgdt [gdtr]
 	call kernel_main
-@@:
-	;cli
-	;hlt
+        add esp, 3 * 4
+ @@:
+	cli
+	hlt
 	jmp @b
 
 section ".data" writable
